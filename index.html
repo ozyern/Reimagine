@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content="0;url=home.html">
+    <script>location.replace('home.html');</script>
+  </head>
+  <body>
+    <p>Redirecting to <a href="home.html">home</a>…</p>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Python Notes</title>
+    <meta name="description" content="Python Notes">
+    <style>
+      :root{--bg1:#0b0f1a;--bg2:#0d0b2a;--accent:#ff4081;--muted:rgba(255,255,255,0.7)}
+      html,body{height:100%;}
+      body{
+        margin:0;
+        font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+        background: radial-gradient(1200px 600px at 10% 10%, rgba(255,64,129,0.06), transparent), linear-gradient(180deg,var(--bg1),var(--bg2));
+        color:#fff;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      .hero{
+        width:100%;
+        max-width:1200px;
+        padding:80px 24px;
+        text-align:center;
+        position:relative;
+      }
+      .title{
+        font-weight:800;
+        color:#fff;
+        font-size:clamp(48px,9vw,120px);
+        line-height:0.9;
+        letter-spacing:-1px;
+        margin:0 0 18px 0;
+        text-transform:none;
+        text-shadow:0 10px 30px rgba(0,0,0,0.6);
+      }
+      .sub{
+        color:var(--muted);
+        font-size:clamp(16px,2.2vw,22px);
+        margin:0 0 30px 0;
+        font-weight:500;
+      }
+      .cta{
+        display:inline-block;
+        padding:14px 24px;
+        border-radius:10px;
+        background:linear-gradient(90deg, rgba(255,64,129,0.18), rgba(0,122,255,0.06));
+        color:#fff;
+        text-decoration:none;
+        border:1px solid rgba(255,255,255,0.06);
+        backdrop-filter: blur(6px);
+        font-weight:600;
+      }
+      .glow{
+        position:absolute;
+        inset:auto auto -140px -140px;
+        width:480px;
+        height:480px;
+        filter:blur(80px);
+        opacity:0.35;
+        background:linear-gradient(45deg, rgba(255,64,129,0.9), rgba(0,122,255,0.8));
+        transform:rotate(20deg);
+        z-index:0;
+        left:50%;
+        transform:translateX(-50%) rotate(20deg);
+      }
+      /* keep content readable on very small screens */
+      @media (max-width:480px){
+        .hero{padding:40px 16px}
+        .title{font-size:38px}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hero" role="main">
+      <div class="glow" aria-hidden="true"></div>
+      <h1 class="title">Python Notes</h1>
+      <p class="sub">Python Notes Made by Aditya</p>
+      <a class="cta" href="#" onclick="return false">Get Started</a>
+    </main>
+  </body>
+</html>
