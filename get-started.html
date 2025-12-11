@@ -11,11 +11,13 @@
       .container{max-width:900px;margin:0 auto}
       a{color:#ff86b0;text-decoration:none}
       h1{font-family: 'Orbitron', Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; font-size:40px;margin-bottom:6px}
-      .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:24px;border-radius:12px}
+      .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:24px;border-radius:12px;backdrop-filter:blur(8px) saturate(140%);box-shadow:0 12px 30px rgba(2,6,23,0.6);}
       pre{background:#071022;color:#dff3ff;padding:14px;border-radius:8px;overflow:auto}
       .steps{margin:20px 0;display:grid;gap:14px}
-      .step{padding:14px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
-      .back{display:inline-block;margin-top:18px;padding:10px 14px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+      .step{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px) saturate(130%);box-shadow:0 8px 22px rgba(2,6,23,0.45);transition:transform .18s ease,box-shadow .18s ease}
+      .step:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+      .back{display:inline-block;margin-top:18px;padding:10px 14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:10px;border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(8px) saturate(140%);box-shadow:0 10px 26px rgba(2,6,23,0.5);transition:transform .18s ease}
+      .back:hover{transform:translateY(-4px)}
       /* glassier boot overlay */
       .boot-inner{padding:22px;border-radius:12px;position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);box-shadow:0 18px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.03);backdrop-filter: blur(12px) saturate(140%);overflow:hidden}
       .boot-inner::before{content:"";position:absolute;left:-60%;top:-10%;width:60%;height:120%;background:linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));transform:skewX(-18deg) translateX(-100%);animation:liquidSheen 2.6s linear infinite;opacity:0.85;pointer-events:none}
