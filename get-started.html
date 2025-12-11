@@ -16,6 +16,13 @@
       .steps{margin:20px 0;display:grid;gap:14px}
       .step{padding:14px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02)}
       .back{display:inline-block;margin-top:18px;padding:10px 14px;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
+      /* glassier boot overlay */
+      .boot-inner{padding:22px;border-radius:12px;position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);box-shadow:0 18px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.03);backdrop-filter: blur(12px) saturate(140%);overflow:hidden}
+      .boot-inner::before{content:"";position:absolute;left:-60%;top:-10%;width:60%;height:120%;background:linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));transform:skewX(-18deg) translateX(-100%);animation:liquidSheen 2.6s linear infinite;opacity:0.85;pointer-events:none}
+      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(20px,6vw,48px);letter-spacing:1px;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s;text-shadow:0 6px 22px rgba(255,64,129,0.08)}
+      .boot-sub{color:rgba(255,255,255,0.75);font-size:13px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
+      .boot-loader span{box-shadow:0 6px 18px rgba(0,0,0,0.45),0 0 28px rgba(255,64,129,0.06)}
+      @keyframes liquidSheen{0%{transform:skewX(-18deg) translateX(-100%)}50%{transform:skewX(-18deg) translateX(160%)}100%{transform:skewX(-18deg) translateX(160%)}}
       /* Boot overlay (shared styles) */
       .boot-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#04060a;z-index:9999;transition:opacity .35s ease}
       .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px}

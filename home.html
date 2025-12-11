@@ -70,16 +70,23 @@
       }
       /* Boot overlay */
       .boot-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#04060a;z-index:9999;transition:opacity .35s ease;}
-      .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px}
-      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(28px,6vw,72px);letter-spacing:1px;text-transform:none;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s}
-      .boot-sub{color:rgba(255,255,255,0.6);font-size:14px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
+      .boot-inner{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px;border-radius:16px;position:relative;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 50px rgba(2,6,23,0.65), inset 0 1px 0 rgba(255,255,255,0.03);backdrop-filter: blur(12px) saturate(140%);overflow:hidden}
+      .boot-inner::before{content:"";position:absolute;left:-60%;top:-10%;width:60%;height:120%;background:linear-gradient(120deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02));transform:skewX(-18deg) translateX(-100%);animation:liquidSheen 2.6s linear infinite;opacity:0.8;pointer-events:none}
+      .boot-logo{font-family:'Orbitron',Inter,system-ui,Segoe UI,Roboto,Arial;font-weight:900;color:#ff4081;font-size:clamp(28px,6vw,72px);letter-spacing:1px;text-transform:none;opacity:0;transform:translateY(6px) scale(.98);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .15s;text-shadow:0 6px 30px rgba(255,64,129,0.12), 0 20px 60px rgba(0,0,0,0.6)}
+      .boot-sub{color:rgba(255,255,255,0.72);font-size:14px;opacity:0;transform:translateY(6px);animation:bootLogo 900ms cubic-bezier(.2,.9,.2,1) forwards .25s}
       .boot-loader{display:flex;gap:8px;margin-top:12px}
-      .boot-loader span{display:block;width:10px;height:10px;background:linear-gradient(90deg,#ff4081,#007aff);border-radius:50%;opacity:.75;transform:scale(.8);animation:bootPulse 900ms infinite ease-in-out}
+      .boot-loader span{display:block;width:10px;height:10px;background:linear-gradient(90deg,#ff4081,#007aff);border-radius:50%;opacity:.9;transform:scale(.8);animation:bootPulse 900ms infinite ease-in-out;box-shadow:0 6px 18px rgba(0,0,0,0.55),0 0 30px rgba(255,64,129,0.08)}
       .boot-loader span:nth-child(2){animation-delay:120ms}
       .boot-loader span:nth-child(3){animation-delay:240ms}
 
       @keyframes bootLogo{to{opacity:1;transform:translateY(0) scale(1)}}
       @keyframes bootPulse{0%{transform:scale(.8);opacity:.6}50%{transform:scale(1.1);opacity:1}100%{transform:scale(.8);opacity:.6}}
+      @keyframes liquidSheen{0%{transform:skewX(-18deg) translateX(-100%)}50%{transform:skewX(-18deg) translateX(160%)}100%{transform:skewX(-18deg) translateX(160%)}}
+
+      /* glassier CTA */
+      .cta{position:relative;overflow:hidden}
+      .cta::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));pointer-events:none}
+      .cta::after{content:"";position:absolute;left:-80%;top:0;width:80%;height:100%;background:linear-gradient(120deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02));transform:skewX(-18deg) translateX(-100%);animation:liquidSheen 3.2s linear infinite;opacity:0.7;pointer-events:none}
       /* keep content readable on very small screens */
       @media (max-width:480px){
         .hero{padding:40px 16px}
