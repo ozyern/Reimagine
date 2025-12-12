@@ -207,25 +207,25 @@ html,body{
   .home-page .hero{ min-height:100vh; overflow:hidden; }
 }
 
-/* Mobile: place headings at the top (not centered) while preserving visuals */
+/* Mobile: keep headings centered on phones */
 @media (max-width:720px){
-  /* Home page hero becomes top-aligned */
+  /* Home page hero stays centered both vertically and horizontally */
   .home-page .hero{
     display:flex;
-    align-items:flex-start;
-    justify-content:flex-start;
-    text-align:left;
-    padding-top:28px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top:24px;
     padding-left:20px;
     padding-right:20px;
     box-sizing:border-box;
   }
-  .home-page .title{font-size: clamp(28px,8vw,56px); line-height:1.05; margin:0 0 6px 0;}
-  .home-page .sub, .home-page .credit{ text-align:left; margin-left:0; }
+  .home-page .title{font-size: clamp(28px,8vw,72px); line-height:1.02; margin:0 0 8px 0;}
+  .home-page .sub, .home-page .credit{ text-align:center; margin-left:0; }
   .home-page .cta{ margin-top:18px }
 
-  /* Ensure other pages' headings are top-aligned on mobile */
-  .container h1, h1{ text-align:left; margin-top:8px; }
+  /* Ensure other pages' headings are centered on mobile */
+  .container h1, h1{ text-align:center; margin-top:8px; }
   .container{ padding-top:12px; }
 }
 
