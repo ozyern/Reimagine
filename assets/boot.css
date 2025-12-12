@@ -202,4 +202,7 @@ html,body{
 @media (max-width:720px){
   .home-noscroll, .home-noscroll body{ overflow:hidden !important; touch-action:none !important; }
   .home-noscroll html, .home-noscroll{ height:100vh; }
+  /* also support explicit home-page class on body to always prevent mobile scroll */
+  .home-page, .home-page body, .home-page html{ overflow:hidden !important; touch-action:none !important; height:100vh !important; }
+  .home-page .hero{ min-height:100vh; overflow:hidden; }
 }
