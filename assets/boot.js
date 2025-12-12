@@ -73,54 +73,7 @@
     window.addEventListener('load', init);
   }
 
-  /* Auth modal: create once and show on click of [data-auth] buttons */
-  function createAuthModal(){
-    if (document.getElementById('auth-modal')) return document.getElementById('auth-modal');
-    const m = document.createElement('div');
-    m.id = 'auth-modal';
-    m.className = 'auth-modal';
-    m.innerHTML = `
-      <div class="dialog" role="dialog" aria-modal="true">
-        <button class="close" aria-label="Close">✕</button>
-        <h3 id="auth-title">Sign In</h3>
-        <input id="auth-email" type="email" placeholder="Email">
-        <input id="auth-pass" type="password" placeholder="Password">
-        <div class="row">
-          <button class="btn submit">Submit</button>
-          <button class="btn cancel">Cancel</button>
-        </div>
-      </div>`;
-    m.style.display = 'none';
-    document.body.appendChild(m);
-    // handlers
-    m.querySelector('.close').addEventListener('click', ()=>hideAuthModal());
-    m.querySelector('.cancel').addEventListener('click', ()=>hideAuthModal());
-    m.addEventListener('click', (e)=>{ if (e.target===m) hideAuthModal(); });
-    return m;
-  }
-
-  function showAuthModal(mode){
-    const m = createAuthModal();
-    const title = m.querySelector('#auth-title');
-    title.textContent = (mode==='signup') ? 'Sign Up' : 'Sign In';
-    m.style.display = 'flex';
-    requestAnimationFrame(()=> m.style.opacity = '1');
-  }
-
-  function hideAuthModal(){
-    const m = document.getElementById('auth-modal');
-    if (!m) return;
-    m.style.opacity = '0';
-    setTimeout(()=>{ try{ m.style.display='none'; }catch(e){} }, 220);
-  }
-
-  // delegate clicks to data-auth buttons
-  document.addEventListener('click', function(e){
-    const btn = e.target.closest && e.target.closest('[data-auth]');
-    if (!btn) return;
-    const mode = btn.getAttribute('data-auth') || 'signin';
-    showAuthModal(mode);
-  }, {passive:true});
+  /* auth UI removed */
 
   // One-time magic effect for first-time visitors on home page
   function isFirstVisit(){
