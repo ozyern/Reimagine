@@ -1,6 +1,6 @@
 // Insert boot overlay markup and behavior
 (function(){
-  const DURATION = 2000; // ms
+  const DURATION = 1000; // ms
   function createOverlay(){
     const div = document.createElement('div');
     div.id = 'boot-overlay';
