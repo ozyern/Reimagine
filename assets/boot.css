@@ -189,7 +189,7 @@ html,body{
 /* Mobile performance fallback: reduce blurs/shadows and disable heavy effects */
 @media (max-width:720px){
   .boot-overlay{ -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(4,6,10,0.75); }
-  .boot-inner{ -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow:0 8px 18px rgba(2,6,23,0.6); padding:14px; }
+  .boot-inner{ -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow:0 8px 18px rgba(2,6,23,0.6); padding:18px 20px 22px; min-width:min(88vw, 340px); }
   .boot-inner::before{ display:none }
   .glow{ display:none !important; }
   .cta{ -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow:none; border:1px solid rgba(255,255,255,0.04) }
