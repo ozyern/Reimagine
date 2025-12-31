@@ -265,19 +265,31 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // For Sourceforge URLs, ALWAYS open in new tab (never try to fetch)
+    // For Sourceforge URLs, use iframe to trigger download
     const isSourceforge = fileUrl.includes('sourceforge.net') || 
                          fileUrl.includes('dl.sourceforge.net') ||
                          fileUrl.includes('use_mirror');
     
     if (isSourceforge) {
       status.style.display = 'block';
-      showInfo('✓ Opening download in a new tab...');
+      showInfo('✓ Starting download from Sourceforge...');
       progressContainer.style.display = 'none';
-      window.open(fileUrl, '_blank');
+      
+      // Create hidden iframe to trigger download
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = fileUrl;
+      document.body.appendChild(iframe);
+      
+      // Remove iframe after download starts
       setTimeout(() => {
-        status.style.display = 'none';
-      }, 2500);
+        document.body.removeChild(iframe);
+        showSuccess('✓ Download started! Check your browser downloads.');
+        setTimeout(() => {
+          status.style.display = 'none';
+        }, 3000);
+      }, 2000);
+      
       return;
     }
 
