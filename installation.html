@@ -4,8 +4,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Installation Guide — ColorOS Ports</title>
+    <meta name="description" content="Step-by-step installation guide for ColorOS and OxygenOS ROM ports">
+    <meta name="keywords" content="ColorOS, OxygenOS, installation, ROM, fastboot, recovery, OrangeFox">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/boot.css">
+    <style>
+      .guide-frame {
+        background: linear-gradient(135deg, rgba(0,217,255,0.08), rgba(138,43,226,0.06));
+        border: 1px solid rgba(0,217,255,0.15);
+        border-radius: 20px;
+        padding: 40px;
+        margin: 40px 0;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+      .guide-frame::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(0,217,255,0.1), transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .guide-content {
+        position: relative;
+        z-index: 1;
+      }
+      .guide-frame h2 {
+        color: #00d9ff;
+        font-size: 1.8rem;
+        margin-top: 0;
+      }
+      .guide-frame ol, .guide-frame ul {
+        color: rgba(255,255,255,0.9);
+        line-height: 2;
+      }
+      .guide-frame li {
+        margin-bottom: 16px;
+      }
+      code {
+        background:rgba(0,0,0,0.3);
+        padding:4px 8px;
+        border-radius:4px;
+        font-family:monospace;
+        font-size:0.9em;
+      }
+      @media (max-width:768px) {
+        h1 { white-space: nowrap; }
+      }
+    </style>
   </head>
   <body class="content-page">
     <header class="site-header">
@@ -29,17 +81,41 @@
       </div>
     </header>
 
-    <main class="container" style="max-width:900px;margin:110px auto;padding:24px;">
+    <main class="container" style="max-width:1000px;margin:110px auto;padding:24px;">
       <h1>Installation Guide</h1>
-      <ol>
-        <li>Unlock bootloader — follow device-specific steps from manufacturer.</li>
-        <li>Install a custom recovery (TWRP) or the recommended recovery for your device.</li>
-        <li>Make a full backup (Nandroid) and back up important data.</li>
-        <li>Wipe system/data/cache as recommended by the ROM author.</li>
-        <li>Flash the ROM zip and any vendor or firmware packages required.</li>
-        <li>Reboot and follow first-run setup.</li>
-      </ol>
-      <p style="color:rgba(255,255,255,0.75)">This guide is intentionally concise — follow device-specific instructions in each ROM's release notes.</p>
+
+      <div class="guide-frame">
+        <div class="guide-content">
+          <h2>Prerequisites</h2>
+          <ul>
+            <li>Unlocked bootloader + latest Official update installed</li>
+            <li>Download OrangeFox recovery</li>
+          </ul>
+
+          <h2 style="margin-top:32px;">Recovery in Fastboot Mode</h2>
+          <ol>
+            <li>Reboot your device into fastboot with: <code>adb reboot fastboot</code></li>
+            <li>Verify your device is detected: <code>fastboot devices</code></li>
+            <li>If detected, flash recovery to both slots:
+              <ul>
+                <li><code>fastboot flash recovery_a OrangeFox-R12.1-OPKONA-V32.img</code></li>
+                <li><code>fastboot flash recovery_b OrangeFox-R12.1-OPKONA-V32.img</code></li>
+              </ul>
+            </li>
+          </ol>
+
+          <h2 style="margin-top:32px;">Sideload ROM</h2>
+          <ol>
+            <li>Go to recovery: <code>adb reboot recovery</code> or <code>fastboot reboot recovery</code></li>
+            <li>Format Data in recovery menu</li>
+            <li>Select ADB Sideload from recovery</li>
+            <li>Transfer ROM: <code>adb sideload rom.zip</code></li>
+            <li><strong>Note:</strong> If transfer stops at 47%, this is normal — installation continues automatically</li>
+          </ol>
+
+          <p style="color:rgba(0,217,255,0.8);margin-top:32px;font-size:0.95rem;">For device-specific details, refer to each ROM's release notes.</p>
+        </div>
+      </div>
     </main>
 
     <script src="assets/boot.js?v=2"></script>

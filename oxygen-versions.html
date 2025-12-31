@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OxygenOS 16 Versions — ColorOS Ports</title>
+  <meta name="description" content="Select OxygenOS 16 ROM version">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/boot.css">
+  <style>
+    .version-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .version-card {
+      background: linear-gradient(135deg, rgba(255,64,129,0.1), rgba(255,64,129,0.05));
+      border: 1px solid rgba(255,64,129,0.2);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .version-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(255,64,129,0.25);
+      border-color: rgba(255,64,129,0.4);
+    }
+    .version-tag {
+      background: linear-gradient(135deg, rgba(255,64,129,0.2), rgba(255,64,129,0.1));
+      color: #ff6fa3;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .version-tag.latest {
+      background: linear-gradient(135deg, rgba(0,217,255,0.2), rgba(0,217,255,0.1));
+      color: #00d9ff;
+    }
+  </style>
+</head>
+<body class="content-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">ColorOS Ports</div>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="roms.html" class="nav-link">Roms</a>
+        <a href="devices.html" class="nav-link">Devices</a>
+        <a href="installation.html" class="nav-link">Installation Guide</a>
+        <a href="idm.html" class="nav-link">IDM</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="max-width:1000px;margin:110px auto;padding:24px;">
+    <h1>OxygenOS 16 (Port)</h1>
+    <p style="text-align:center;color:rgba(255,255,255,0.75);margin-bottom:40px;">Select a version to view supported devices</p>
+
+    <div class="version-grid">
+      <a href="devices.html?rom=oxygen&version=16.0.2.400" class="version-card">
+        <h3 style="margin:0;color:#ff6fa3;">OxygenOS 16.0.2.400</h3>
+        <span class="version-tag latest">LATEST</span>
+        <p style="margin:0;color:rgba(255,255,255,0.75);font-size:0.9rem;">Latest stable build with all optimizations</p>
+      </a>
+    </div>
+  </main>
+
+  <script src="assets/boot.js?v=2"></script>
+</body>
+</html>
