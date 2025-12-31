@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ev.preventDefault();
     ev.stopPropagation();
     
-    const fileUrl = urlIn.value.trim();
+    let fileUrl = urlIn.value.trim();
     if (!fileUrl) {
       showError('Please provide a URL.');
       return;
@@ -265,19 +265,24 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // For Sourceforge URLs, open in new tab (CORS restrictions prevent direct fetch)
-    if (fileUrl.includes('sourceforge.net') || fileUrl.includes('dl.sourceforge.net')) {
+    // For Sourceforge URLs, ALWAYS open in new tab (never try to fetch)
+    const isSourceforge = fileUrl.includes('sourceforge.net') || 
+                         fileUrl.includes('dl.sourceforge.net') ||
+                         fileUrl.includes('use_mirror');
+    
+    if (isSourceforge) {
       status.style.display = 'block';
-      showInfo('Opening Sourceforge download in a new tab...');
+      showInfo('✓ Opening download in a new tab...');
+      progressContainer.style.display = 'none';
       window.open(fileUrl, '_blank');
       setTimeout(() => {
         status.style.display = 'none';
-      }, 2000);
+      }, 2500);
       return;
     }
 
     // For other URLs (qvznr.github.io), use fetch with progress
-    const filename = nameIn.value.trim() || fileUrl.split('/').pop() || 'download.bin';
+    const filename = fileUrl.split('/').pop() || 'download.bin';
     status.style.display = 'block';
     showInfo('Starting download...');
     downloadBtn.disabled = true;
