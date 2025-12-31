@@ -97,7 +97,7 @@
         </div>
 
         <!-- Download Button -->
-        <button onclick="window.open('https://sourceforge.net/projects/coloxy/files/OxygenOS%2016/16.0.2.400/OnePlus%209%20Pro.zip/download', '_blank')" style="padding:18px 32px;background:linear-gradient(135deg, #ff6fa3 0%, #ff3366 100%);border:none;border-radius:14px;color:#0a0a0a;font-weight:800;cursor:pointer;font-size:clamp(14px,2vw,16px);display:flex;align-items:center;justify-content:center;gap:12px;transition:all .3s ease;letter-spacing:0.5px;box-shadow:0 12px 40px rgba(255,64,129,0.3), 0 0 20px rgba(255,64,129,0.2);text-transform:uppercase;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 16px 50px rgba(255,64,129,0.4), 0 0 30px rgba(255,64,129,0.3)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 12px 40px rgba(255,64,129,0.3), 0 0 20px rgba(255,64,129,0.2)';">
+        <button onclick="downloadROM()" style="padding:18px 32px;background:linear-gradient(135deg, #ff6fa3 0%, #ff3366 100%);border:none;border-radius:14px;color:#0a0a0a;font-weight:800;cursor:pointer;font-size:clamp(14px,2vw,16px);display:flex;align-items:center;justify-content:center;gap:12px;transition:all .3s ease;letter-spacing:0.5px;box-shadow:0 12px 40px rgba(255,64,129,0.3), 0 0 20px rgba(255,64,129,0.2);text-transform:uppercase;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 16px 50px rgba(255,64,129,0.4), 0 0 30px rgba(255,64,129,0.3)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 12px 40px rgba(255,64,129,0.3), 0 0 20px rgba(255,64,129,0.2)';">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           Download ROM via IDM
         </button>
@@ -108,5 +108,13 @@
   </main>
 
   <script src="assets/boot.js"></script>
+  <script src="assets/idm.js?v=2"></script>
+  <script>
+    function downloadROM() {
+      const url = 'https://sourceforge.net/projects/coloxy/files/OxygenOS%2016/16.0.2.400/OnePlus%209%20Pro.zip/download';
+      // Use same method as working IDM form
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>
