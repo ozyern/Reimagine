@@ -630,7 +630,6 @@ body.light-mode .rom-card p{color:rgba(15,17,21,0.8)}
   align-items:center;
   position:absolute;
   left:50%;
-  transform:translateX(-50%);
   top:50%;
   transform:translate(-50%, -50%);
 }
