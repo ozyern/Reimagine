@@ -148,16 +148,7 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
 
     // Download from fastest mirror
     setTimeout(() => {
-      const a = document.createElement('a');
-      a.href = fastest.url;
-      a.download = filename;
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      
-      statusEl.textContent = `Downloading from ${fastest.mirror} (${fastest.speed.toFixed(2)} MB/s)`;
-      statusEl.style.color = '#4ade80';
+      downloadWithProgress(fastest.url, filename, statusEl);
     }, 300);
 
   } catch(err) {
@@ -170,17 +161,86 @@ async function downloadWithMirrorTesting(fileUrl, filename, statusEl) {
     statusEl.style.color = '#4ade80';
     
     setTimeout(() => {
-      const a = document.createElement('a');
-      a.href = fallbackUrl;
-      a.download = filename;
-      a.target = '_blank';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      
-      statusEl.textContent = 'Download started';
-      statusEl.style.color = '#4ade80';
+      downloadWithProgress(fallbackUrl, filename, statusEl);
     }, 300);
+  }
+}
+
+// Download file with progress tracking
+async function downloadWithProgress(url, filename, statusEl) {
+  try {
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressPercent = document.getElementById('progressPercent');
+    const downloadedSize = document.getElementById('downloadedSize');
+    const downloadSpeed = document.getElementById('downloadSpeed');
+    const downloadTime = document.getElementById('downloadTime');
+
+    // Show progress container
+    if(progressContainer) progressContainer.style.display = 'block';
+
+    const startTime = Date.now();
+    let lastUpdateTime = startTime;
+    let lastDownloadedSize = 0;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Download failed: ' + response.status);
+
+    const contentLength = parseInt(response.headers.get('content-length'), 10);
+    const reader = response.body.getReader();
+    let downloadedBytes = 0;
+    const chunks = [];
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      chunks.push(value);
+      downloadedBytes += value.length;
+
+      // Update progress bar
+      const progress = (downloadedBytes / contentLength) * 100;
+      if(progressBar) progressBar.style.width = progress.toFixed(0) + '%';
+      if(progressPercent) progressPercent.textContent = progress.toFixed(0) + '%';
+
+      // Update speed and time every 500ms
+      const now = Date.now();
+      if (now - lastUpdateTime > 500) {
+        const elapsedSeconds = (now - startTime) / 1000;
+        const bytesDownloadedSinceLastUpdate = downloadedBytes - lastDownloadedSize;
+        const speed = (bytesDownloadedSinceLastUpdate / 1024 / 1024) / ((now - lastUpdateTime) / 1000);
+
+        if(downloadedSize) downloadedSize.textContent = (downloadedBytes / 1024 / 1024).toFixed(1) + ' MB';
+        if(downloadSpeed) downloadSpeed.textContent = speed.toFixed(1) + ' MB/s';
+        if(downloadTime) downloadTime.textContent = Math.floor(elapsedSeconds) + 's';
+
+        lastUpdateTime = now;
+        lastDownloadedSize = downloadedBytes;
+      }
+    }
+
+    // Create blob and download
+    const blob = new Blob(chunks);
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(blobUrl);
+
+    const totalSeconds = (Date.now() - startTime) / 1000;
+    statusEl.textContent = `Download complete! (${(downloadedBytes / 1024 / 1024).toFixed(1)} MB in ${totalSeconds.toFixed(0)}s)`;
+    statusEl.style.color = '#4ade80';
+    
+    if(progressPercent) progressPercent.textContent = '100%';
+    if(progressBar) progressBar.style.width = '100%';
+
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = 'Download failed: ' + err.message;
+    statusEl.style.color = '#ff6fa3';
   }
 }
 
