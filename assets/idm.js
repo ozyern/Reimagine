@@ -273,55 +273,16 @@ document.addEventListener('DOMContentLoaded', function () {
     
     if (isSourceforge) {
       status.style.display = 'block';
-      showInfo('✓ Starting download...');
+      showInfo('✓ Redirecting to download...');
       progressContainer.style.display = 'none';
       
-      // Method 1: Create a temporary anchor element and click it
-      // This is the most reliable way for IDM to catch downloads
-      const link = document.createElement('a');
-      link.href = fileUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      
-      // Extract filename from URL if available
-      const filename = nameIn.value.trim() || fileUrl.split('/').pop().split('?')[0] || 'download';
-      link.download = filename;
-      
-      // Add to DOM temporarily
-      document.body.appendChild(link);
-      
-      // Trigger the download
-      link.click();
-      
-      // Remove the link after a brief delay
+      // Direct navigation - this is the ONLY way IDM can properly intercept
+      // IDM monitors navigation events, not programmatic downloads
       setTimeout(() => {
-        document.body.removeChild(link);
-      }, 100);
+        window.location.href = fileUrl;
+      }, 500);
       
-      // Also try iframe method as backup (some IDM configurations prefer this)
-      const existingFrame = document.getElementById('downloadFrame');
-      if (existingFrame) {
-        existingFrame.remove();
-      }
-      
-      const iframe = document.createElement('iframe');
-      iframe.id = 'downloadFrame';
-      iframe.style.display = 'none';
-      iframe.src = fileUrl;
-      document.body.appendChild(iframe);
-      
-      setTimeout(() => {
-        const frame = document.getElementById('downloadFrame');
-        if (frame) {
-          frame.remove();
-        }
-      }, 10000);
-      
-      showSuccess('✓ Download triggered! IDM should catch this download.');
-      
-      setTimeout(() => {
-        status.style.display = 'none';
-      }, 5000);
+      showSuccess('✓ Starting download... IDM will catch this!');
       
       return;
     }
