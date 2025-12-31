@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Global function for ROM download pages to trigger IDM downloads
 function startIDMDownload(url, filename) {
-  // Direct navigation is the only reliable way for IDM to intercept
-  // IDM monitors all page navigation to download URLs
-  window.location.href = url;
+  // Open in new window - IDM will intercept this
+  // Don't use window.location as it navigates away from the page
+  window.open(url, '_blank');
 }
