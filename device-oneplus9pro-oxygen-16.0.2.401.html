@@ -116,6 +116,11 @@
           Download Kernel
         </button>
 
+        <button onclick="downloadRecovery()" style="margin-top:12px;padding:16px 28px;background:linear-gradient(135deg, rgba(76,175,80,0.2), rgba(56,142,60,0.1));border:1px solid rgba(76,175,80,0.4);border-radius:12px;color:#4caf50;font-weight:800;cursor:pointer;font-size:clamp(13px,2vw,15px);display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s ease;letter-spacing:0.4px;text-transform:uppercase;" onmouseover="this.style.transform='translateY(-2px)';" onmouseout="this.style.transform='translateY(0)';">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download OrangeFox Recovery
+        </button>
+
         <p style="color:rgba(255,255,255,0.5);font-size:0.85rem;text-align:center;margin:8px 0 0 0;">See <a href="installation.html" style="color:#ff6fa3;text-decoration:none;font-weight:700;border-bottom:2px solid #ff6fa3;">Installation Guide</a> for flashing instructions</p>
       </div>
     </div>
@@ -163,6 +168,7 @@
   <script>
     const ROM_URL = 'https://sourceforge.net/projects/colorosports/files/OxygenOS%2016/16.0.2.401_OnePlus15/ota_full-LE2123_16.0.2.401-CPH2745-01031229-IN-2025-12-01-23b2da3913.zip/download';
     const KERNEL_URL = 'https://sourceforge.net/projects/colorosports/files/OxygenOS%2016/16.0.2.401_OnePlus15/Rapchick_Kernal_v1.zip/download';
+    const RECOVERY_URL = 'https://sourceforge.net/projects/colorosports/files/Recovery/orangefox.img_9Pro/download';
     
     const mirrors = [
       { name: 'PhoenixNAP', domain: 'phoenixnap', icon: '⚡', base: 40, peak: 45 },
@@ -254,6 +260,10 @@
 
     function downloadKernel() {
       window.open(KERNEL_URL, '_blank');
+    }
+
+    function downloadRecovery() {
+      window.open(RECOVERY_URL, '_blank');
     }
   </script>
 </body>
