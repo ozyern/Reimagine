@@ -19,7 +19,7 @@ body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, #111 0%, #000 65%);
   color: #fff;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ================= HEADER ================= */
@@ -213,21 +213,22 @@ body {
 
 /* ================= CONTENT ================= */
 .content {
-  max-width: 1400px;
+  max-width: 900px;
   margin: auto;
   padding: 80px 64px 140px 64px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 60px;
 }
 
 /* Phone */
 .phone {
-  min-height: 720px;   /* gives space so it doesn't look squashed */
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 1200px;
+  width: 100%;
 }
 
 
@@ -250,7 +251,8 @@ body {
 
 /* ================= GUIDE CARD ================= */
 .guide-card {
-  max-width: 560px;
+  max-width: 100%;
+  width: 100%;
   padding: 64px 56px;
   border-radius: 28px;
 
@@ -313,6 +315,86 @@ code {
   margin-top: 18px;
   font-size: 12.5px;
   opacity: 0.5;
+}
+
+/* Animated Download Element */
+.download-indicator {
+  position: fixed;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 50;
+}
+
+.download-indicator.show {
+  display: flex;
+}
+
+.download-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all .3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.download-icon:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+  transform: scale(1.1);
+}
+
+.download-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: rgba(255,255,255,0.8);
+  fill: none;
+  stroke-width: 2;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.download-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  opacity: 0.8;
+  transition: all .3s ease;
+}
+
+.download-indicator:hover .download-label {
+  color: rgba(255,255,255,0.9);
 }
 
 /* Mobile */
@@ -462,6 +544,17 @@ code {
   <a href="roms.html">ROMs</a>
 </nav>
 
+<div class="download-indicator" id="downloadIndicator">
+  <div class="download-icon" onclick="downloadGuide()">
+    <svg viewBox="0 0 24 24">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+  </div>
+  <span class="download-label">Download</span>
+</div>
+
 <section class="hero">
   <div class="bg-text">GUIDE</div>
 
@@ -534,6 +627,69 @@ code {
 </section>
 
 <script>
+// Show download indicator on desktop
+function toggleDownloadIndicator() {
+  const indicator = document.getElementById('downloadIndicator');
+  if (window.innerWidth > 1024) {
+    indicator.classList.add('show');
+  } else {
+    indicator.classList.remove('show');
+  }
+}
+
+// Download guide as HTML
+function downloadGuide() {
+  const guideCard = document.querySelector('.guide-card').innerHTML;
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Installation Guide — ColorOS Ports</title>
+      <style>
+        body {
+          font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          background: #111;
+          color: #fff;
+          padding: 40px;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+        h2 { font-size: 24px; margin-bottom: 20px; }
+        h3 { font-size: 18px; margin-top: 30px; margin-bottom: 15px; }
+        code { 
+          display: block; 
+          background: #222; 
+          padding: 15px; 
+          border-radius: 8px; 
+          overflow-x: auto;
+          margin: 10px 0;
+        }
+        li { margin-bottom: 10px; }
+      </style>
+    </head>
+    <body>
+      ${guideCard}
+    </body>
+    </html>
+  `;
+  
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'ColorOS-Installation-Guide.html';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+// Initialize on page load
+window.addEventListener('load', toggleDownloadIndicator);
+window.addEventListener('resize', toggleDownloadIndicator);
+
 // Hamburger Menu Toggle
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
