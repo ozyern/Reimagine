@@ -70,6 +70,87 @@ body {
   border: 1px solid rgba(255,255,255,0.14);
 }
 
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+  background: none;
+  border: none;
+  z-index: 101;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2.5px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  transition: all .3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  z-index: 99;
+  animation: slideDown .3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu a {
+  padding: 16px 28px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: all .25s ease;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a.active {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
 
 /* ================= HERO ================= */
 .hero {
@@ -222,13 +303,122 @@ code {
 
 /* Mobile */
 @media(max-width: 1024px) {
+  .header {
+    padding: 20px 28px;
+  }
+
+  .logo {
+    font-size: 12px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
   .content {
     grid-template-columns: 1fr;
     padding: 120px 28px;
+    gap: 60px;
   }
 
   .phone img {
     width: 360px;
+  }
+
+  .guide-card {
+    padding: 32px 24px;
+    margin-bottom: 40px;
+  }
+
+  .guide-card h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .guide-card h3 {
+    font-size: 16px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  .guide-card p,
+  .guide-card li {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  code {
+    padding: 12px 14px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .hero-line {
+    font-size: 13px;
+  }
+}
+
+@media(max-width: 640px) {
+  .header {
+    padding: 16px 20px;
+  }
+
+  .logo {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .content {
+    padding: 100px 16px;
+    gap: 40px;
+  }
+
+  .phone {
+    min-height: 400px;
+  }
+
+  .phone img {
+    width: 280px;
+  }
+
+  .guide-card {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  .guide-card h2 {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .guide-card h3 {
+    font-size: 14px;
+    margin-top: 24px;
+    margin-bottom: 10px;
+  }
+
+  .guide-card p,
+  .guide-card li {
+    font-size: 13px;
+  }
+
+  code {
+    padding: 10px 12px;
+    font-size: 11px;
+    margin: 8px 0 12px;
+    overflow-x: auto;
+  }
+
+  .hero-line {
+    font-size: 12px;
+  }
+
+  .note {
+    font-size: 11px;
   }
 }
 </style>
@@ -239,14 +429,24 @@ code {
 <header class="header">
   <div class="logo">ColorOS Ports</div>
   <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="installation.html" class="active">Guide</a>
+    <a href="devices.html">Devices</a>
+    <a href="roms.html">ROMs</a>
+  </nav>
+  <button class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="installation.html" class="active">Guide</a>
   <a href="devices.html">Devices</a>
   <a href="roms.html">ROMs</a>
 </nav>
-
-  </nav>
-</header>
 
 <section class="hero">
   <div class="bg-text">GUIDE</div>
@@ -318,6 +518,83 @@ code {
 
 
 </section>
+
+<script>
+// Hamburger Menu Toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('active');
+});
+
+// Close menu when a link is clicked
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+  }
+});
+
+// Push Notifications Support
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  navigator.serviceWorker.register('sw.js').then(registration => {
+    console.log('Service Worker registered');
+    
+    // Check for push permission
+    if (Notification.permission === 'granted') {
+      // Subscribe to push notifications
+      registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array('YOUR_PUBLIC_KEY_HERE')
+      }).then(subscription => {
+        console.log('Push subscription successful:', subscription);
+      }).catch(err => {
+        console.log('Push subscription failed:', err);
+      });
+    }
+  }).catch(error => {
+    console.log('Service Worker registration failed:', error);
+  });
+}
+
+// Request notification permission
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        new Notification('ColorOS Ports', {
+          body: 'Push notifications enabled!',
+          icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect fill="%23000" width="192" height="192"/><text x="50%" y="50%" font-size="100" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">CO</text></svg>'
+        });
+      }
+    });
+  }
+}
+
+// Convert VAPID key
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\\-/g, '+')
+    .replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+</script>
 
 </body>
 </html>
