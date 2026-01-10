@@ -35,6 +35,7 @@ header .logo {
   display: flex;
   gap: 60px;
   align-items: center;
+  margin-left: auto;
 }
 
 .nav-links li a {
