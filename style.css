@@ -513,30 +513,30 @@ header {
 
 .light-wrap {
   position: relative;
-  width: 520px;
-  max-width: 90%;
+  width: 680px;          /* BIGGER */
+  max-width: 95%;
+  transform: translateX(40px); /* Push slightly right */
 }
 
 .light-wrap img {
   width: 100%;
+  height: auto;
   display: block;
 
-  /* Blend magic */
   filter:
-    brightness(1.1)
-    contrast(1.05)
-    drop-shadow(0 0 60px rgba(255,255,255,0.25));
+    brightness(1.15)
+    contrast(1.08)
+    drop-shadow(0 0 90px rgba(255,255,255,0.35));
 
-  /* Soft edge fade */
   -webkit-mask-image: radial-gradient(
     ellipse at center,
-    black 45%,
-    transparent 75%
+    black 50%,
+    transparent 80%
   );
   mask-image: radial-gradient(
     ellipse at center,
-    black 45%,
-    transparent 75%
+    black 50%,
+    transparent 80%
   );
 }
 
@@ -544,13 +544,14 @@ header {
 .light-wrap::before {
   content: "";
   position: absolute;
-  inset: -120px;
+  inset: -180px; /* larger glow area */
   background: radial-gradient(
     circle,
-    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.22),
     transparent 70%
   );
-  filter: blur(40px);
+  z-index: -1;
+  filter: blur(60px);
 }
 
 .scroll {
