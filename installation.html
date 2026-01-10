@@ -7,6 +7,7 @@
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
 
 <style>
 * {
@@ -544,15 +545,17 @@ code {
 
 <body>
 
+<!-- ===== HEADER ===== -->
 <header class="header">
   <div class="logo">ColorOS Ports</div>
-  <nav class="nav-links">
+
+  <nav class="nav" id="navLinks">
     <a href="index.html">Home</a>
-    <a href="installation.html" class="active">Guide</a>
-    <a href="devices.html">Devices</a>
-    <a href="roms.html">ROMs</a>
+    <a href="roms.html">Explore ROMs</a>
+    <a href="devices.html">Supported Device</a>
+    <a href="installation.html" class="active">Installation Guide</a>
   </nav>
-  <button class="hamburger" id="hamburger">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
     <span></span>
     <span></span>
     <span></span>
@@ -561,9 +564,9 @@ code {
 
 <nav class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
-  <a href="installation.html" class="active">Guide</a>
-  <a href="devices.html">Devices</a>
-  <a href="roms.html">ROMs</a>
+  <a href="roms.html">Explore ROMs</a>
+  <a href="devices.html">Supported Device</a>
+  <a href="installation.html" class="active">Installation Guide</a>
 </nav>
 
 <div class="scroll-down" id="scrollDown">
