@@ -440,6 +440,9 @@ body::after {
   justify-content: space-between;
   align-items: center;
   padding: 160px 70px 100px;
+  background:
+    radial-gradient(circle at 70% 40%, rgba(255,255,255,0.08), transparent 55%),
+    linear-gradient(to right, #000 35%, #0a0a0a 70%, #000);
 }
 
 .hero-left {
@@ -477,67 +480,60 @@ body::after {
 
 .hero-right {
   position: relative;
-  isolation: isolate;
+  width: 50%;
+  display: flex;
+  justify-content: center;
 }
-
-.hero-right img {
-  width: 420px;
-  filter: drop-shadow(0 0 80px rgba(255,255,255,0.35));
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== LIGHT BLEND EFFECT ===== */
 
 .light-wrap {
   position: relative;
 }
 
+/* MAIN IMAGE — DO NOT MASK */
+.light-wrap img {
+  width: 420px;
+  position: relative;
+  z-index: 2;
+  filter:
+    drop-shadow(0 0 60px rgba(255,255,255,0.35))
+    drop-shadow(0 0 120px rgba(255,255,255,0.2));
+}
+
+/* AMBIENT LIGHT AROUND PORTAL */
 .light-wrap::before {
   content: "";
   position: absolute;
-  inset: -120px;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
   background: radial-gradient(
-    circle at center,
-    rgba(255,255,255,0.35),
-    rgba(255,255,255,0.15) 35%,
-    rgba(0,0,0,0.9) 70%
+    circle,
+    rgba(255,255,255,0.25),
+    rgba(255,255,255,0.08) 40%,
+    transparent 70%
   );
-  filter: blur(40px);
-  z-index: -1;
+  filter: blur(60px);
+  z-index: 1;
 }
 
+/* FLOOR LIGHT (IMPORTANT) */
 .light-wrap::after {
   content: "";
   position: absolute;
   bottom: -40px;
   left: 50%;
+  width: 320px;
+  height: 120px;
   transform: translateX(-50%);
-  width: 260px;
-  height: 80px;
   background: radial-gradient(
-    ellipse at center,
-    rgba(255,255,255,0.25),
+    ellipse,
+    rgba(255,255,255,0.35),
     transparent 70%
   );
-  filter: blur(20px);
-}
-
-.hero-right img {
-  width: 420px;
-  mask-image: radial-gradient(
-    circle at center,
-    black 60%,
-    transparent 100%
-  );
-  -webkit-mask-image: radial-gradient(
-    circle at center,
-    black 60%,
-    transparent 100%
-  );
-  filter:
-    drop-shadow(0 0 80px rgba(255,255,255,0.4))
-    drop-shadow(0 0 160px rgba(255,255,255,0.15));
+  filter: blur(30px);
+  z-index: 0;
 }
 
 .scroll {
