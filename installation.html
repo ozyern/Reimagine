@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Installation Guide — ColorOS Ports</title>
     <meta name="description" content="Step-by-step installation guide for ColorOS and OxygenOS ROM ports">
-    <meta name="keywords" content="ColorOS, OxygenOS, installation, ROM, fastboot, recovery, OrangeFox">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -16,50 +15,45 @@
       }
       
       body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family: 'Inter', sans-serif;
         background: #000;
         color: #fff;
-        overflow-x: hidden;
+        line-height: 1.6;
       }
 
-      /* Header */
+      /* Navigation */
       .header {
         position: fixed;
         top: 0;
-        left: 0;
-        right: 0;
+        width: 100%;
         z-index: 1000;
-        padding: 18px 50px;
-        background: transparent;
-      }
-
-      .header-inner {
-        max-width: 1600px;
-        margin: 0 auto;
+        padding: 30px 60px;
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
       }
 
       .logo {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
       }
 
       .nav-links {
         display: flex;
-        gap: 45px;
+        gap: 40px;
         align-items: center;
       }
 
       .nav-links a {
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255, 255, 255, 0.6);
         text-decoration: none;
-        font-size: 14px;
-        font-weight: 400;
-        transition: color 0.2s;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: 0.3s;
       }
 
       .nav-links a:hover {
@@ -68,147 +62,108 @@
 
       .download-btn {
         background: #fff;
-        color: #000;
-        padding: 8px 20px;
-        border-radius: 5px;
-        font-weight: 500;
-        transition: opacity 0.2s;
-      }
-
-      .download-btn:hover {
-        opacity: 0.9;
-        color: #000;
+        color: #000 !important;
+        padding: 10px 25px;
+        border-radius: 4px;
+        font-weight: 600;
       }
 
       /* Hero Section */
-      .hero-section {
-        position: relative;
+      .hero {
         height: 100vh;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        overflow: hidden;
+        align-items: center;
+        position: relative;
+        text-align: center;
       }
 
-      .guide-bg-text {
+      .bg-text {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: clamp(120px, 25vw, 380px);
+        font-size: 25vw;
         font-weight: 900;
-        color: #1a1a1a;
-        letter-spacing: -0.02em;
-        z-index: 0;
-        user-select: none;
+        color: rgba(255, 255, 255, 0.03);
+        z-index: 1;
+        letter-spacing: -10px;
         pointer-events: none;
-        line-height: 1;
       }
 
       .hero-content {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        margin-top: -80px;
+        z-index: 2;
       }
 
       .hero-title {
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 300;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 6px;
-        letter-spacing: 0.3px;
+        letter-spacing: 4px;
+        margin-bottom: 10px;
+        color: rgba(255,255,255,0.9);
       }
 
       .hero-subtitle {
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.45);
-        font-weight: 300;
-        letter-spacing: 0.2px;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 1px;
       }
 
+      /* Scroll Indicator */
       .scroll-indicator {
         position: absolute;
-        right: 50px;
-        top: 50%;
-        transform: translateY(-50%);
+        right: 60px;
+        bottom: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 15px;
+        gap: 20px;
       }
 
       .scroll-text {
         writing-mode: vertical-rl;
-        font-size: 11px;
-        letter-spacing: 2px;
-        color: rgba(255, 255, 255, 0.6);
+        font-size: 10px;
+        letter-spacing: 3px;
         text-transform: uppercase;
-        font-weight: 400;
+        color: rgba(255,255,255,0.4);
       }
 
-      .scroll-arrow {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 20px;
-        animation: bounce 2s infinite;
-      }
-
-      @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(10px); }
-      }
-
-      /* Content Section */
+      /* Instructions Section */
       .content-section {
-        position: relative;
-        min-height: 100vh;
-        padding: 80px 50px;
-        background: #000;
-      }
-
-      .content-grid {
-        max-width: 1600px;
+        padding: 100px 60px;
+        max-width: 1400px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 1fr 1.3fr;
-        gap: 100px;
-        align-items: start;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
       }
 
-      .phone-container {
-        position: sticky;
-        top: 120px;
+      .phone-preview {
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: flex-start;
       }
 
       .phone-mockup {
         width: 100%;
-        max-width: 420px;
-        height: auto;
+        max-width: 450px;
+        filter: drop-shadow(0 0 50px rgba(255,255,255,0.05));
       }
 
-      .instructions-card {
-        background: #141414;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 50px 45px;
+      .guide-card {
+        background: #0a0a0a;
+        border: 1px solid rgba(255,255,255,0.05);
+        padding: 60px;
+        border-radius: 24px;
       }
 
-      .instruction-section {
-        margin-bottom: 35px;
+      .step-group {
+        margin-bottom: 50px;
       }
 
-      .instruction-section:last-child {
-        margin-bottom: 0;
-      }
-
-      .section-title {
-        font-size: 16px;
+      .step-group h2 {
+        font-size: 20px;
         font-weight: 600;
+        margin-bottom: 25px;
         color: #fff;
-        margin-bottom: 14px;
       }
 
       .instruction-list {
@@ -216,159 +171,103 @@
       }
 
       .instruction-list li {
-        margin-bottom: 8px;
-        font-size: 13px;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.75);
+        font-size: 14px;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 15px;
+        padding-left: 25px;
         position: relative;
-        padding-left: 18px;
       }
 
       .instruction-list li::before {
-        content: '•';
+        content: "";
         position: absolute;
         left: 0;
-        color: rgba(255, 255, 255, 0.4);
-      }
-
-      .numbered-list {
-        counter-reset: item;
-        list-style: none;
-      }
-
-      .numbered-list li {
-        counter-increment: item;
-        margin-bottom: 10px;
-        font-size: 13px;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.75);
-        position: relative;
-        padding-left: 22px;
-      }
-
-      .numbered-list li::before {
-        content: counter(item) ".";
-        position: absolute;
-        left: 0;
-        font-weight: 500;
+        top: 10px;
+        width: 6px;
+        height: 1px;
+        background: rgba(255,255,255,0.4);
       }
 
       code {
-        background: rgba(255, 255, 255, 0.08);
-        padding: 2px 7px;
-        border-radius: 3px;
-        font-family: 'Courier New', monospace;
+        background: rgba(255,255,255,0.05);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        color: #fff;
+        font-size: 13px;
+      }
+
+      .note-text {
         font-size: 12px;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(255,255,255,0.3);
+        margin-top: 15px;
+        font-style: italic;
       }
 
-      .note {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 12px;
-      }
-
-      /* Mobile Responsive */
-      @media (max-width: 1100px) {
-        .content-grid {
-          grid-template-columns: 1fr;
-          gap: 50px;
-        }
-
-        .phone-container {
-          position: relative;
-          top: 0;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .header {
-          padding: 18px 25px;
-        }
-
-        .nav-links a:not(.download-btn) {
-          display: none;
-        }
-
-        .content-section {
-          padding: 60px 25px;
-        }
-
-        .instructions-card {
-          padding: 35px 28px;
-        }
-
-        .scroll-indicator {
-          display: none;
-        }
-
-        .guide-bg-text {
-          font-size: 90px;
-        }
+      @media (max-width: 1024px) {
+        .content-section { grid-template-columns: 1fr; }
+        .header { padding: 20px; }
+        .bg-text { font-size: 40vw; }
       }
     </style>
   </head>
   <body>
-    <!-- Header -->
+
     <header class="header">
-      <div class="header-inner">
-        <div class="logo">ColorOS Ports</div>
-        <nav class="nav-links">
-          <a href="home.html">Home</a>
-          <a href="roms.html">Explore Roms</a>
-          <a href="devices.html">Supported Device</a>
-          <a href="roms.html" class="download-btn">Download</a>
-        </nav>
-      </div>
+      <div class="logo">ColorOS Ports</div>
+      <nav class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="roms.html">Explore</a>
+        <a href="devices.html">Devices</a>
+        <a href="roms.html" class="download-btn">Download</a>
+      </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="guide-bg-text">GUIDE</div>
+    <section class="hero">
+      <div class="bg-text">GUIDE</div>
       <div class="hero-content">
-        <h1 class="hero-title">Here You have to follow the steps EXACTLY</h1>
-        <p class="hero-subtitle">Ported By Aditya</p>
+        <h1 class="hero-title">FOLLOW THE STEPS EXACTLY</h1>
+        <p class="hero-subtitle">Optimized and Ported By Aditya</p>
       </div>
       <div class="scroll-indicator">
-        <span class="scroll-text">Scroll Down</span>
-        <span class="scroll-arrow">↓</span>
+        <span class="scroll-text">SCROLL TO BEGIN</span>
+        <div style="width: 1px; height: 60px; background: rgba(255,255,255,0.2);"></div>
       </div>
     </section>
 
-    <!-- Content Section -->
     <section class="content-section">
-      <div class="content-grid">
-        <div class="phone-container">
-          <img src="data:image/svg+xml,%3Csvg width='400' height='820' viewBox='0 0 400 820' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='820' rx='50' fill='url(%23grad1)'/%3E%3Crect x='8' y='8' width='384' height='804' rx='45' fill='%23E8E8E8'/%3E%3Crect x='20' y='60' width='360' height='720' rx='30' fill='%23000'/%3E%3Ccircle cx='200' cy='35' r='8' fill='%23333'/%3E%3Crect x='140' y='28' width='120' height='14' rx='7' fill='%23333'/%3E%3Ccircle cx='85' cy='145' r='42' fill='%23444' opacity='0.6'/%3E%3Ccircle cx='85' cy='145' r='30' fill='%23555'/%3E%3Ccircle cx='75' cy='135' r='8' fill='%23666'/%3E%3Ccircle cx='85' cy='185' r='15' fill='%23555'/%3E%3Ccircle cx='125' cy='165' r='12' fill='%23555'/%3E%3Ctext x='320' y='200' font-family='Arial' font-size='80' font-weight='bold' fill='%23333' opacity='0.15'%3E1+%3C/text%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0' y1='0' x2='400' y2='820'%3E%3Cstop offset='0' stop-color='%23F5F5F5'/%3E%3Cstop offset='1' stop-color='%23DADADA'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="OnePlus Phone" class="phone-mockup" />
+      <div class="phone-preview">
+        <img src="data:image/svg+xml,%3Csvg width='400' height='820' viewBox='0 0 400 820' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='820' rx='50' fill='url(%23grad1)'/%3E%3Crect x='8' y='8' width='384' height='804' rx='45' fill='%23E8E8E8'/%3E%3Crect x='20' y='60' width='360' height='720' rx='30' fill='%23000'/%3E%3Ccircle cx='200' cy='35' r='8' fill='%23333'/%3E%3Crect x='140' y='28' width='120' height='14' rx='7' fill='%23333'/%3E%3Ccircle cx='85' cy='145' r='42' fill='%23444' opacity='0.6'/%3E%3Ccircle cx='85' cy='145' r='30' fill='%23555'/%3E%3Ccircle cx='75' cy='135' r='8' fill='%23666'/%3E%3Ccircle cx='85' cy='185' r='15' fill='%23555'/%3E%3Ccircle cx='125' cy='165' r='12' fill='%23555'/%3E%3Ctext x='320' y='200' font-family='Arial' font-size='80' font-weight='bold' fill='%23333' opacity='0.15'%3E1+%3C/text%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0' y1='0' x2='400' y2='820'%3E%3Cstop offset='0' stop-color='%23F5F5F5'/%3E%3Cstop offset='1' stop-color='%23DADADA'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E" alt="Device Preview" class="phone-mockup">
+      </div>
 
-        <div class="instructions-card">
-          <div class="instruction-section">
-            <h2 class="section-title">Before You Start (Prerequisites)</h2>
-            <ul class="instruction-list">
-              <li>Unlocked bootloader + latest Official update installed</li>
-              <li>Download OrangeFox recovery</li>
-            </ul>
-          </div>
+      <div class="guide-card">
+        <div class="step-group">
+          <h2>Prerequisites</h2>
+          <ul class="instruction-list">
+            <li>Unlocked bootloader is mandatory</li>
+            <li>Latest Official firmware update installed</li>
+            <li>OrangeFox Recovery image downloaded</li>
+          </ul>
+        </div>
 
-          <div class="instruction-section">
-            <h2 class="section-title">Step 1: Boot Phone Into Fastboot Mode</h2>
-            <ol class="numbered-list">
-              <li>Reboot your device into fastboot with: <code>adb reboot fastboot</code></li>
-              <li>Verify your device is detected: <code>fastboot devices</code></li>
-              <li>Boot into OrangeFox recovery: <code>fastboot boot orangefox.img</code></li>
-            </ol>
-          </div>
+        <div class="step-group">
+          <h2>Step 1: Fastboot</h2>
+          <ul class="instruction-list">
+            <li>Reboot to fastboot: <code>adb reboot fastboot</code></li>
+            <li>Verify connection: <code>fastboot devices</code></li>
+            <li>Boot OrangeFox: <code>fastboot boot orangefox.img</code></li>
+          </ul>
+        </div>
 
-          <div class="instruction-section">
-            <h2 class="section-title">Sideload ROM</h2>
-            <ol class="numbered-list">
-              <li>Go to recovery: <code>adb reboot recovery</code> or <code>fastboot reboot recovery</code></li>
-              <li>Format Data in recovery menu</li>
-              <li>Select ADB Sideload from recovery</li>
-              <li>Transfer ROM: <code>adb sideload rom.zip</code></li>
-              <li class="note">Note: If transfer stops at 47%, this is normal — installation continues automatically</li>
-              <li class="note">For device-specific details, refer to each ROM's release notes.</li>
-            </ol>
-          </div>
+        <div class="step-group">
+          <h2>Step 2: Sideload</h2>
+          <ul class="instruction-list">
+            <li>Navigate to Recovery Menu</li>
+            <li>Select 'Format Data' (Wipe all data)</li>
+            <li>Select 'ADB Sideload'</li>
+            <li>Run: <code>adb sideload rom.zip</code></li>
+          </ul>
+          <p class="note-text">Note: 47% progress hang is normal. The device will handle the rest.</p>
         </div>
       </div>
     </section>
