@@ -191,25 +191,28 @@ body {
 
 /* Guide card */
 .guide-card {
-  width: 480px;
-  min-height: 620px;          /* THIS is the key */
-  padding: 42px 38px;
+  position: relative;
+  max-width: 560px;
+  padding: 56px 52px;
 
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.06),
-    rgba(255,255,255,0.02)
-  );
+  border-radius: 26px;
 
-  border-radius: 26px;        /* rectangle, not square */
-  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(28,28,28,0.85) 0%,
+      rgba(18,18,18,0.85) 100%
+    );
 
   box-shadow:
-    0 40px 120px rgba(0,0,0,0.85),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 80px 160px rgba(0,0,0,0.85),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(0,0,0,0.6);
 
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
 }
+
 
 
 /* Steps */
