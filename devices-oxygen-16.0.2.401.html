@@ -1,47 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>OxygenOS 16.0.2.401 Supported Devices — ColorOS Ports</title>
-  <meta name="description" content="Download OxygenOS 16.0.2.401 for OnePlus 9 Pro, 9, 8 Pro, 8">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OxygenOS 16.0.2.401 — Supported Devices</title>
+  <meta name="description" content="Download OxygenOS 16.0.2.401 for supported OnePlus devices">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/boot.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .devices-hero {
+      padding: 160px 60px 80px;
+      text-align: center;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: rgba(0,217,255,0.15);
+      border: 1px solid rgba(0,217,255,0.4);
+      color: #00d9ff;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .devices-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      margin: 0 0 16px 0;
+      background: linear-gradient(135deg, #ff6fa3, #ff3366);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+    }
+
+    .devices-hero p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      margin: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .devices-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px 100px;
+    }
+
+    .devices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+      gap: 32px;
+    }
+
+    .device-card {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,64,129,0.08), rgba(255,64,129,0.04));
+      border: 1px solid rgba(255,64,129,0.25);
+      border-radius: 24px;
+      padding: 36px 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      overflow: hidden;
+    }
+
+    .device-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(255,64,129,0.15), transparent 70%);
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .device-card:hover::before {
+      opacity: 1;
+    }
+
+    .device-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 24px 64px rgba(255,64,129,0.35), 0 0 40px rgba(255,64,129,0.2);
+      border-color: rgba(255,64,129,0.5);
+    }
+
+    .device-icon {
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, #ff6fa3, #ff3366);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      box-shadow: 0 12px 32px rgba(255,64,129,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .device-icon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%);
+    }
+
+    .device-icon img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+
+    .device-name {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: #ff6fa3;
+      letter-spacing: 1px;
+    }
+
+    .device-codename {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin: -8px 0 0 0;
+      font-weight: 500;
+    }
+
+    .device-status {
+      background: rgba(0,217,255,0.15);
+      border: 1px solid rgba(0,217,255,0.3);
+      color: #00d9ff;
+      padding: 6px 16px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .download-arrow {
+      color: #ff6fa3;
+      font-size: 1.5rem;
+      transition: transform .3s ease;
+    }
+
+    .device-card:hover .download-arrow {
+      transform: translateY(4px);
+    }
+
+    @media (max-width: 960px) {
+      .devices-container {
+        padding: 0 24px 80px;
+      }
+
+      .devices-hero {
+        padding: 140px 24px 60px;
+      }
+
+      .devices-grid {
+        gap: 24px;
+      }
+    }
+  </style>
 </head>
-<body class="content-page">
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">ColorOS Ports</div>
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="site-nav">
-        <a href="home.html" class="nav-link">Home</a>
-        <a href="roms.html" class="nav-link">Roms</a>
-        <a href="oxygen-versions.html" class="nav-link">OxygenOS Versions</a>
-        <a href="installation.html" class="nav-link">Installation Guide</a></nav>
-      <div class="header-actions">
-        <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
-      </div>
-    </div>
+<body>
+  <header class="header">
+    <div class="logo">ColorOS Ports</div>
+    <nav class="nav" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="roms.html" class="active">Explore ROMs</a>
+      <a href="devices.html">Supported Device</a>
+      <a href="installation.html">Installation Guide</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 
-  <main class="container" style="max-width:1000px;margin:110px auto;padding:24px;">
-    <h1>OxygenOS 16.0.2.401 — Supported Devices</h1>
-    <p style="text-align:center;color:rgba(255,255,255,0.75);margin-bottom:40px;">Select a device to download OxygenOS 16.0.2.401</p>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="roms.html">Explore ROMs</a>
+    <a href="devices.html">Supported Device</a>
+    <a href="installation.html">Installation Guide</a>
+  </nav>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;align-items:stretch;">
-      <a href="device-oneplus9pro-oxygen-16.0.2.401.html" class="card" style="padding:20px;text-decoration:none;color:inherit;transition:all .3s ease;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;">
-        <div style="width:120px;height:120px;background:#ff6fa3;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#0f1115;font-weight:bold;">OnePlus 9 Pro</div>
-        <h3 style="margin:0;font-size:1.1rem;">OnePlus 9 Pro</h3>
-        <p style="color:rgba(255,255,255,0.6);margin:0;font-size:0.9rem;">Download ROM</p>
+  <section class="devices-hero">
+    <span class="version-badge">● Latest Version</span>
+    <h1>Version 16.0.2.401</h1>
+    <p>Select your device to download the ROM</p>
+  </section>
+
+  <div class="devices-container">
+    <div class="devices-grid">
+      <a href="device-oneplus9pro-oxygen-16.0.2.401.html" class="device-card">
+        <div class="device-icon">
+          <img src="assets/op15.png" alt="OnePlus 9 Pro" onerror="this.style.display='none';this.parentElement.innerHTML='📱'">
+        </div>
+        <h3 class="device-name">OnePlus 9 Pro</h3>
+        <p class="device-codename">LE2123</p>
+        <span class="device-status">● Available</span>
+        <span class="download-arrow">↓</span>
       </a>
     </div>
-  </main>
+  </div>
 
   <script src="assets/boot.js"></script>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.header') && !e.target.closest('.mobile-menu')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
