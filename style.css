@@ -749,6 +749,17 @@ footer {
     width: 320px;
   }
 
+  .light-wrap {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .light-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .scroll {
     position: static;
     writing-mode: horizontal-tb;
@@ -764,8 +775,9 @@ footer {
   }
 
   .logo {
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 1px;
+    white-space: nowrap;
   }
 
   .hero {
