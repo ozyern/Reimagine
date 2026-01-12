@@ -89,14 +89,16 @@
     /* Title */
     .hero-title {
       font-family: 'Anton', sans-serif;
-      font-size: 96px;
+      font-size: 120px;
       font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.5px;
+      line-height: 0.9;
+      letter-spacing: -1px;
       white-space: nowrap;
       color: rgba(255,255,255,0.88);
-      text-shadow: 0 10px 30px rgba(0,0,0,0.55);
-      margin: 0 0 24px 0;
+      text-shadow: 0 12px 36px rgba(0,0,0,0.55);
+      margin: 0 0 28px 0;
+      transform: scaleX(1.05);
+      transform-origin: left center;
     }
 
     /* Subtitle */
@@ -122,23 +124,65 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    /* ===== Scroll Indicator ===== */
-    .scroll-indicator {
-      position: absolute;
-      right: 40px;
-      bottom: 40px;
-      writing-mode: vertical-rl;
-      color: rgba(255,255,255,0.5);
-      font-size: 12px;
-      letter-spacing: 2px;
+    /* ===== Scroll ===== */
+    .scroll-down {
+      position: fixed;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      z-index: 50;
     }
 
-    .scroll-indicator span {
-      display: block;
+    .scroll-down.hidden {
+      display: none;
+    }
+
+    .scroll-arrow {
+      width: 24px;
       height: 40px;
-      width: 1px;
-      background: rgba(255,255,255,0.4);
-      margin-top: 12px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 12px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-arrow::after {
+      content: '';
+      width: 2px;
+      height: 8px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 2px;
+      animation: scrollBounce 2s infinite;
+    }
+
+    @keyframes scrollBounce {
+      0% {
+        transform: translateY(-6px);
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(6px);
+        opacity: 0;
+      }
+    }
+
+    .scroll-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      opacity: 0.7;
     }
 
     @media (max-width: 768px) {
@@ -147,7 +191,7 @@
       }
 
       .hero-title {
-        font-size: 48px;
+        font-size: 54px;
       }
 
       .subtitle {
@@ -158,9 +202,16 @@
         font-size: 14px;
       }
 
-      .scroll-indicator {
+      .scroll-down {
         right: 20px;
-        bottom: 20px;
+      }
+
+      .scroll-arrow {
+        width: 20px;
+        height: 32px;
+      }
+
+      .scroll-label {
         font-size: 10px;
       }
     }
@@ -192,6 +243,11 @@
   <a href="installation.html" > Installation Guide</a>
 </nav>
 
+<div class="scroll-down" id="scrollDown">
+  <div class="scroll-arrow"></div>
+  <span class="scroll-label">Scroll</span>
+</div>
+
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -215,10 +271,6 @@
     </p>
   </div>
 
-  <div class="scroll-indicator">
-    Scroll Down
-    <span></span>
-  </div>
 </section>
 
 <!-- ===== SECOND HERO ===== -->
@@ -269,6 +321,21 @@
 </footer>
 
 <script>
+function handleScrollIndicator() {
+  const indicator = document.getElementById('scrollDown');
+  if (!indicator) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      indicator.classList.add('hidden');
+    } else {
+      indicator.classList.remove('hidden');
+    }
+  });
+}
+
+window.addEventListener('load', handleScrollIndicator);
+
 // Mobile nav toggle
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
