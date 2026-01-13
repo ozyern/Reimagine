@@ -30,18 +30,18 @@
     /* ===== Light image (fixed size) ===== */
     .hero-light {
       position: absolute;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
 
-      width: 100vw;
-      height: 100vh;
+      width: 110vw;
+      height: 110vh;
 
       object-fit: cover;
-      object-position: center right;
+      object-position: right center;
 
-      transform: scale(1.12);
-
-      max-width: none;
-      max-height: none;
+      transform: translateX(5%) scale(1.05);
 
       z-index: 1;
       pointer-events: none;
@@ -54,9 +54,10 @@
 
       background: linear-gradient(
         90deg,
-        rgba(0,0,0,0.9) 0%,
-        rgba(0,0,0,0.6) 35%,
-        rgba(0,0,0,0.2) 65%,
+        rgba(0,0,0,0.95) 0%,
+        rgba(0,0,0,0.75) 30%,
+        rgba(0,0,0,0.35) 55%,
+        rgba(0,0,0,0.1) 75%,
         rgba(0,0,0,0) 100%
       );
 
@@ -96,13 +97,15 @@
     /* Title */
     .hero-title {
       font-family: 'Anton', sans-serif;
-      font-size: 96px;
+      font-size: 104px;
       font-weight: 400;
       line-height: 1;
       letter-spacing: -0.5px;
       white-space: nowrap;
-      color: rgba(255,255,255,0.9);
-      text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      color: #fff;
+      text-shadow:
+        0 10px 40px rgba(0,0,0,0.8),
+        0 0 20px rgba(255,255,255,0.05);
       margin: 0 0 24px 0;
     }
 
