@@ -86,10 +86,22 @@
         </div>
       </div>
 
-      <button onclick="downloadROM()" style="padding: 16px 28px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.5px;"
+      <button onclick="directDownload()" style="padding: 16px 28px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; color: #fff; font-weight: 700; cursor: pointer; font-size: 0.95rem; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.5px;"
               onmouseover="this.style.background='rgba(255,255,255,0.15)'"
               onmouseout="this.style.background='rgba(255,255,255,0.1)'">
         📥 Download ROM
+      </button>
+
+      <button onclick="downloadKernel()" style="padding: 14px 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; color: #aaa; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.5px;"
+              onmouseover="this.style.background='rgba(255,255,255,0.06)'; this.style.color='#fff'"
+              onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.color='#aaa'">
+        Download Kernel
+      </button>
+
+      <button onclick="downloadRecovery()" style="padding: 14px 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; color: #aaa; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all .3s ease; text-transform: uppercase; letter-spacing: 0.5px;"
+              onmouseover="this.style.background='rgba(255,255,255,0.06)'; this.style.color='#fff'"
+              onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.color='#aaa'">
+        OrangeFox Recovery
       </button>
 
       <p style="text-align: center; color: #666; font-size: 0.85rem; margin: 8px 0 0 0;">
@@ -102,7 +114,9 @@
 <script src="assets/boot.js"></script>
 <script src="assets/idm.js"></script>
 <script>
-const ROM_URL = 'https://sourceforge.net/projects/coloxy/files/ColorOS16/coloros-16.0.3.504-oneplus9pro.zip';
+const ROM_URL = 'https://sourceforge.net/projects/reimagine/files/ColorOS%2016%20Global/16.0.3.504/ota_full-LE2123_16.0.3.504-CPH2791.zip/download';
+    const KERNEL_URL = 'https://sourceforge.net/projects/reimagine/files/Kernel/Rapchick_Kernel_9Series.zip/download';
+    const RECOVERY_URL = 'https://sourceforge.net/projects/reimagine/files/Recovery/orangefox_9series.img/download';
 
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -126,8 +140,16 @@ document.addEventListener('click', (e) => {
   }
 });
 
-function downloadROM() {
+function directDownload() {
   window.open(ROM_URL, '_blank');
+}
+
+function downloadKernel() {
+  window.open(KERNEL_URL, '_blank');
+}
+
+function downloadRecovery() {
+  window.open(RECOVERY_URL, '_blank');
 }
 </script>
 
