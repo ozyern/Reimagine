@@ -14,6 +14,8 @@
             align-items: center;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
         }
         
         .easter-egg-container {
@@ -172,6 +174,31 @@
     </div>
     
     <script>
+        // Screen shake effect like Google's 67 easter egg
+        function applyScreenShake() {
+            let angle = 0;
+            let isShaking = true;
+            
+            const shakeInterval = setInterval(() => {
+                if (!isShaking) {
+                    clearInterval(shakeInterval);
+                    document.body.style.transform = 'rotate(0deg)';
+                    return;
+                }
+                
+                angle = Math.sin(Date.now() / 100) * 1;
+                document.body.style.transform = `rotate(${angle}deg)`;
+            }, 16);
+            
+            // Stop shaking after 2 seconds
+            setTimeout(() => {
+                isShaking = false;
+            }, 2000);
+        }
+        
+        // Apply screen shake on page load
+        window.addEventListener('load', applyScreenShake);
+        
         // Create floating particles
         const particlesContainer = document.getElementById('particles');
         
